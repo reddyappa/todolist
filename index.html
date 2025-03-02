@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<style>
+.app-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 80px;
+    opacity: 0.5;
+}
+.main{
+	width:480px;
+	margin:auto;
+	margin-top:60px;
+	}
+</style>
+</head>
+
+<body ng-app="myApp" ng-controller="totoCtrl">
+	<div class="container">
+    
+    <div class="main">
+    
+    <h1 class="app-title">Todos</h1>
+    	<h3 class="text-center">Add your first todo</h3>
+<form ng-submit="addnew()" >
+<div class="col-lg-10" style="padding-left:0px; padding-right:0px;">
+<input type="text" ng-model="todoInput" class="form-control" placeholder="Add New" />
+</div>
+<div class="col-lg-2" style="padding-left:0px; padding-right:0px;">
+<input type="button" ng-click="addnew()" class="btn btn-primary" value="Add New" />
+</div>
+
+</form>
+<table class="table table-bordered table-hover" style="margin-top:60px;">
+	<tr ng-repeat="x in todoList">
+    	<td style="width:30px;"><input type="checkbox" ng-model="x.done" class="form-control" style="width:20px;" /> </td>
+        <td style="vertical-align:middle">{{x.todoText}}</td>
+    </tr>
+</table>
+<div >
+
+	
+</div>
+
+<input type="button" ng-click="remove()" value="Remove Item" class="btn btn-warning" />
+
+
+</div>
+</div>
+<script>
+var app = angular.module("myApp",[]);
+	app.controller("totoCtrl",function($scope){
+		$scope.todoList =[{todoText:"clouse House", done:false}];
+		
+		//add items
+		$scope.addnew = function(){
+			$scope.todoList.push({todoText:$scope.todoInput,done:false});
+			$scope.todoInput="";
+			
+			}
+			//remove items
+			
+			$scope.remove = function(){
+			var oldList = $scope.todoList;
+        $scope.todoList = [];
+        angular.forEach(oldList, function(x) {
+            if (!x.done) $scope.todoList.push(x);
+        });
+			
+			
+			}
+			
+			
+			
+		
+		})
+
+</script>
+</body>
+</html>
